@@ -1,20 +1,14 @@
-def calculator():
-    print("Welcome to Simple Text Calculator")
-    print("Type 'exit' to quit.\n")
+import streamlit as st
 
-    while True:
-        expression = input("Enter expression: ")
+st.title("🧮 Web Calculator")
 
-        if expression.lower() == "exit":
-            print("Exiting calculator...")
-            break
+# Input field for expression
+expression = st.text_input("Enter expression (use +, -, *, /, (), etc.):")
 
-        try:
-            result = eval(expression)   # eval() handles BODMAS automatically
-            print("Result:", result)
-        except Exception as e:
-            print("Error:", e)
-
-if __name__ == "__main__":
-    calculator()
-
+# Calculate when button pressed
+if st.button("Calculate"):
+    try:
+        result = eval(expression)  # respects BODMAS
+        st.success(f"Result: {result}")
+    except Exception as e:
+        st.error(f"Error: {e}")
